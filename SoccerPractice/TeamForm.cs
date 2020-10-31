@@ -24,6 +24,7 @@ namespace SoccerPractice
         private void TeamForm_Load(object sender, EventArgs e)
         {
             LoadTeams();
+            SoccerApplicationContext._formCount++;
         }
 
         protected internal void LoadTeams()
@@ -93,6 +94,11 @@ namespace SoccerPractice
         private void players_Button_Click(object sender, EventArgs e)
         {
             players_ListBox.DataSource = team.Players.ToList();
+        }
+
+        private void ToPlayers_Button_Click(object sender, EventArgs e)
+        {
+            SoccerApplicationContext.PlayerFormsNew();
         }
     }
 }

@@ -24,6 +24,7 @@ namespace SoccerPractice
         private void PlayerForm_Load(object sender, EventArgs e)
         {
             LoadPlayers();
+            SoccerApplicationContext._formCount++;
             //players_DataGridView.DataSource = context.Players.Select(p=>new { p.Name, p.Position, p.Age, p.Team }).ToList();
         }
 
@@ -47,8 +48,9 @@ namespace SoccerPractice
 
         private void teams_Button_Click(object sender, EventArgs e)
         {
-            TeamForm teamForm = new TeamForm();
-            teamForm.Show();
+            //TeamForm teamForm = new TeamForm();
+            //teamForm.Show();
+            SoccerApplicationContext.TeamFormsNew();
         }
 
         /// <summary>
@@ -158,6 +160,11 @@ namespace SoccerPractice
             context.Players.Remove(player);
             context.SaveChanges();
             players_DataGridView.Refresh();
+        }
+
+        private void PlayerForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }
