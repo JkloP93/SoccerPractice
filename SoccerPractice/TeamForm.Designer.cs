@@ -40,6 +40,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.players_ListBox = new System.Windows.Forms.ListBox();
             this.playerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.ToPlayers_Button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.teams_DataGridView)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.teamBindingSource)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -49,7 +50,7 @@
             // players_Button
             // 
             this.players_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.players_Button.Location = new System.Drawing.Point(247, 406);
+            this.players_Button.Location = new System.Drawing.Point(481, 400);
             this.players_Button.Name = "players_Button";
             this.players_Button.Size = new System.Drawing.Size(131, 23);
             this.players_Button.TabIndex = 9;
@@ -162,11 +163,23 @@
             // 
             this.playerBindingSource.DataSource = typeof(SoccerPractice.Player);
             // 
+            // ToPlayers_Button
+            // 
+            this.ToPlayers_Button.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.ToPlayers_Button.Location = new System.Drawing.Point(12, 400);
+            this.ToPlayers_Button.Name = "ToPlayers_Button";
+            this.ToPlayers_Button.Size = new System.Drawing.Size(75, 23);
+            this.ToPlayers_Button.TabIndex = 11;
+            this.ToPlayers_Button.Text = "Players";
+            this.ToPlayers_Button.UseVisualStyleBackColor = true;
+            this.ToPlayers_Button.Click += new System.EventHandler(this.ToPlayers_Button_Click);
+            // 
             // TeamForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(624, 441);
+            this.Controls.Add(this.ToPlayers_Button);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.players_Button);
             this.Controls.Add(this.edit_Button);
@@ -198,5 +211,6 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn couchDataGridViewTextBoxColumn;
         private System.Windows.Forms.BindingSource teamBindingSource;
         private System.Windows.Forms.BindingSource playerBindingSource;
+        private System.Windows.Forms.Button ToPlayers_Button;
     }
 }

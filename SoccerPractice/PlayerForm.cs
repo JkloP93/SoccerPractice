@@ -24,6 +24,8 @@ namespace SoccerPractice
         private void PlayerForm_Load(object sender, EventArgs e)
         {
             LoadPlayers();
+            SoccerApplicationContext._formCount++;
+            //players_DataGridView.DataSource = context.Players.Select(p=>new { p.Name, p.Position, p.Age, p.Team }).ToList();
         }
 
         protected internal void LoadPlayers()
@@ -36,6 +38,7 @@ namespace SoccerPractice
         private void players_DataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             player = context.Players.Find(((Player)Data((DataGridView)sender, e.RowIndex)).Id);
+            //MessageBox.Show(player.ToString());
         }
 
         protected internal object Data(DataGridView data, int rowIndex)
@@ -45,8 +48,9 @@ namespace SoccerPractice
 
         private void teams_Button_Click(object sender, EventArgs e)
         {
-            TeamForm teamForm = new TeamForm();
-            teamForm.Show();
+            //TeamForm teamForm = new TeamForm();
+            //teamForm.Show();
+            SoccerApplicationContext.TeamFormsNew();
         }
 
         /// <summary>
@@ -68,7 +72,8 @@ namespace SoccerPractice
             //Choosing of a team.
             //If that team doesn't exists - creating a new one.
             Team team;
-            if (editor.team_comboBox.SelectedValue is null)
+            //int teamId = (int)editor.team_comboBox.SelectedValue;
+            if (/*context.Teams.Find(teamId)*/editor.team_comboBox.SelectedValue is null)
             {
                 team = new Team { Name = editor.team_comboBox.Text };
                 context.Teams.Add(team);
@@ -126,7 +131,7 @@ namespace SoccerPractice
             //Selecting of a team.
             //If that team doesn't exist - creating a new one.
             Team team;
-            if (editor.team_comboBox.SelectedValue is null)
+            if (/*context.Teams.Find(teamId)*/editor.team_comboBox.SelectedValue is null)
             { 
                 team = new Team { Name = editor.team_comboBox.Text };
                 context.Teams.Add(team);
@@ -140,6 +145,7 @@ namespace SoccerPractice
             player.Position = editor.position_comboBox.Text;
             player.TeamId = team.Id;
 
+            //context.Entry(player).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
             players_DataGridView.Refresh();
         }
@@ -154,6 +160,11 @@ namespace SoccerPractice
             context.Players.Remove(player);
             context.SaveChanges();
             players_DataGridView.Refresh();
+        }
+
+        private void PlayerForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+
         }
     }
 }
