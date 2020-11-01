@@ -82,7 +82,6 @@ namespace SoccerPractice
         private void teams_DataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             team = context.Teams.Find(((Team)Data((DataGridView)sender, e.RowIndex)).Id);
-            //MessageBox.Show(Team.ToString());
         }
 
         protected internal object Data(DataGridView data, int rowIndex)

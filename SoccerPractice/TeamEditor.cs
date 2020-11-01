@@ -29,11 +29,5 @@ namespace SoccerPractice
             else
                 ok_Button.DialogResult = DialogResult.OK;
         }
-
-        //protected internal void TextBoxValidation(TextBox box, ErrorProvider error)
-        //{
-        //    if (string.IsNullOrEmpty(box.Text))
-        //        error.SetError(box, "Can't be empty!");
-        //}
     }
 }

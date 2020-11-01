@@ -39,8 +39,6 @@ namespace SoccerPractice
         {
             if (ValidateChildren())
             {
-                //ok_Button.DialogResult = DialogResult.OK;
-                //Close();
                 DialogResult = DialogResult.OK;
             }
         }

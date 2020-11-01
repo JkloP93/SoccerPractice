@@ -24,7 +24,6 @@ namespace SoccerPractice
         private void PlayerForm_Load(object sender, EventArgs e)
         {
             LoadPlayers();
-            //players_DataGridView.DataSource = context.Players.Select(p=>new { p.Name, p.Position, p.Age, p.Team }).ToList();
         }
 
         protected internal void LoadPlayers()
@@ -37,7 +36,6 @@ namespace SoccerPractice
         private void players_DataGridView_CellEnter(object sender, DataGridViewCellEventArgs e)
         {
             player = context.Players.Find(((Player)Data((DataGridView)sender, e.RowIndex)).Id);
-            //MessageBox.Show(player.ToString());
         }
 
         protected internal object Data(DataGridView data, int rowIndex)
@@ -70,8 +68,7 @@ namespace SoccerPractice
             //Choosing of a team.
             //If that team doesn't exists - creating a new one.
             Team team;
-            //int teamId = (int)editor.team_comboBox.SelectedValue;
-            if (/*context.Teams.Find(teamId)*/editor.team_comboBox.SelectedValue is null)
+            if (editor.team_comboBox.SelectedValue is null)
             {
                 team = new Team { Name = editor.team_comboBox.Text };
                 context.Teams.Add(team);
@@ -129,7 +126,7 @@ namespace SoccerPractice
             //Selecting of a team.
             //If that team doesn't exist - creating a new one.
             Team team;
-            if (/*context.Teams.Find(teamId)*/editor.team_comboBox.SelectedValue is null)
+            if (editor.team_comboBox.SelectedValue is null)
             { 
                 team = new Team { Name = editor.team_comboBox.Text };
                 context.Teams.Add(team);
@@ -143,7 +140,6 @@ namespace SoccerPractice
             player.Position = editor.position_comboBox.Text;
             player.TeamId = team.Id;
 
-            //context.Entry(player).State = System.Data.Entity.EntityState.Modified;
             context.SaveChanges();
             players_DataGridView.Refresh();
         }
