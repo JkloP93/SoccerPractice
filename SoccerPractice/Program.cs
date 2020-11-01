@@ -19,8 +19,7 @@ namespace SoccerPractice
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            //Application.Run(new PlayerForm());
-            using (/*SoccerApplicationContext*/ soccerAppContext = new SoccerApplicationContext())
+            using (soccerAppContext = new SoccerApplicationContext())
             {
                 soccerAppContext.Run();
                 Application.Run(soccerAppContext); 
@@ -51,40 +50,38 @@ namespace SoccerPractice
 
     class SoccerApplicationContext : ApplicationContext
     {
+        /// <summary>
+        /// Counter for forms currently in used.
+        /// </summary>
+        /// <remarks>
+        /// When a form opens - counter increases and vice-versa.
+        /// </remarks>
         protected internal static int _formCount;
+        /// <summary>
+        /// Variable to store PlayerForm.
+        /// </summary>
         protected internal static PlayerForm plForm;
+        /// <summary>
+        /// Variable to store TeamForm.
+        /// </summary>
         protected internal static TeamForm tmForm;
 
-        public SoccerApplicationContext()
-        {
-            //plForm = new PlayerForm();
-            ////tmForm = new TeamForm();
-            ////plForm.FormClosed += OnFormClosed;
-            ////tmForm.FormClosed += OnFormClosed;
-            ////plForm.Load += OnFormLoad;
-            ////tmForm.Load += OnFormLoad;
+        public SoccerApplicationContext() { }
 
-            //plForm.Show();
-            ////tmForm.Show();
-            //MessageBox.Show("Kek");
-            ////tmForm.Close();
-        }
-
+        /// <summary>
+        /// Method that enables run first form (PlayerForm currently) and the whole app accordingly.
+        /// </summary>
         internal void Run()
         {
             plForm = new PlayerForm();
-            //tmForm = new TeamForm();
-            //plForm.FormClosed += OnFormClosed;
-            //tmForm.FormClosed += OnFormClosed;
-            //plForm.Load += OnFormLoad;
-            //tmForm.Load += OnFormLoad;
-
             plForm.Show();
-            //tmForm.Show();
-            MessageBox.Show("Kek");
-            //tmForm.Close();
         }
 
+        /// <summary>
+        /// <para>Method used either for creating new instance of PlayerForm class</para> 
+        /// <para>and assigning it to the plForm variable</para>
+        /// <para>or focusing on existing PlayerForm object</para>
+        /// </summary>
         public static void PlayerFormsNew()
         {
             if (plForm == null)
@@ -96,6 +93,11 @@ namespace SoccerPractice
                 plForm.Focus();
         }
 
+        /// <summary>
+        /// Method used either for creating new instance of TeamForm class 
+        /// and assigning it to the tmForm variable
+        /// or focusing on existing TeamForm object
+        /// </summary>
         public static void TeamFormsNew()
         {
             if (tmForm == null)
@@ -107,6 +109,11 @@ namespace SoccerPractice
                 tmForm.Focus();
         }
 
+        /// <summary>
+        /// Handler for FormClosed event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         internal void OnFormClosed(object sender, EventArgs e)
         {
             _formCount--;
@@ -122,43 +129,6 @@ namespace SoccerPractice
                     tmForm = null;
                     return;
             }
-        }
-
-        void OnFormLoad(object sender, EventArgs e)
-        {
-            //if(sender is PlayerForm p)
-            //    p.LoadPlayers();
-            //if (sender is TeamForm t)
-            //    t.LoadTeams();
-            _formCount++;
-            MessageBox.Show("Форма открыта");
-            switch (sender)
-            {
-                case PlayerForm p:
-                    p.LoadPlayers();
-                    return;
-                case TeamForm t:
-                    t.LoadTeams();
-                    return;
-            }
-        }        
-        internal static void WhenFormLoad(Form form)
-        {
-            //if(sender is PlayerForm p)
-            //    p.LoadPlayers();
-            //if (sender is TeamForm t)
-            //    t.LoadTeams();
-            _formCount++;
-            //MessageBox.Show("Форма открыта");
-            //switch (form)
-            //{
-            //    case PlayerForm p:
-            //        p.LoadPlayers();
-            //        return;
-            //    case TeamForm t:
-            //        t.LoadTeams();
-            //        return;
-            //}
         }
     }
 }
