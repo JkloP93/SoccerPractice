@@ -20,9 +20,10 @@ namespace SoccerPractice
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             //Application.Run(new PlayerForm());
-            using (SoccerApplicationContext soccerAppContext = new SoccerApplicationContext())
+            using (/*SoccerApplicationContext*/ soccerAppContext = new SoccerApplicationContext())
             {
-                Application.Run(soccerAppContext);
+                soccerAppContext.Run();
+                Application.Run(soccerAppContext); 
             }
         }
         internal static void TextBoxValidation(TextBox box, ErrorProvider error, CancelEventArgs e)
@@ -44,6 +45,8 @@ namespace SoccerPractice
                 e.Cancel = true;
             }
         }
+
+        internal static SoccerApplicationContext soccerAppContext;
     }
 
     class SoccerApplicationContext : ApplicationContext
@@ -53,6 +56,21 @@ namespace SoccerPractice
         protected internal static TeamForm tmForm;
 
         public SoccerApplicationContext()
+        {
+            //plForm = new PlayerForm();
+            ////tmForm = new TeamForm();
+            ////plForm.FormClosed += OnFormClosed;
+            ////tmForm.FormClosed += OnFormClosed;
+            ////plForm.Load += OnFormLoad;
+            ////tmForm.Load += OnFormLoad;
+
+            //plForm.Show();
+            ////tmForm.Show();
+            //MessageBox.Show("Kek");
+            ////tmForm.Close();
+        }
+
+        internal void Run()
         {
             plForm = new PlayerForm();
             //tmForm = new TeamForm();
@@ -69,7 +87,7 @@ namespace SoccerPractice
 
         public static void PlayerFormsNew()
         {
-            if (plForm is null)
+            if (plForm == null)
             {
                 plForm = new PlayerForm();
                 plForm.Show();
@@ -80,7 +98,7 @@ namespace SoccerPractice
 
         public static void TeamFormsNew()
         {
-            if (tmForm is null)
+            if (tmForm == null)
             {
                 tmForm = new TeamForm();
                 tmForm.Show();
@@ -88,14 +106,22 @@ namespace SoccerPractice
             else
                 tmForm.Focus();
         }
-        //TODO: Make one method FormsNew(Form form)
 
-        private void OnFormClosed(object sender, EventArgs e)
+        internal void OnFormClosed(object sender, EventArgs e)
         {
             _formCount--;
             MessageBox.Show("Форма закрыта");
             if (_formCount <= 0)
                 ExitThread();
+            switch (sender)
+            {
+                case PlayerForm p:
+                    plForm = null;
+                    return;
+                case TeamForm t:
+                    tmForm = null;
+                    return;
+            }
         }
 
         void OnFormLoad(object sender, EventArgs e)

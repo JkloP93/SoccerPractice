@@ -25,6 +25,7 @@ namespace SoccerPractice
         {
             LoadTeams();
             SoccerApplicationContext._formCount++;
+            this.FormClosed += Program.soccerAppContext.OnFormClosed;
         }
 
         protected internal void LoadTeams()
